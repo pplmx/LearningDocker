@@ -8,11 +8,22 @@ FROM centos
 
 LABEL maintaner="purplemystic"
 
+# create some ENV info
+ENV MY_YUM_REPO /etc/yum.repos.d/my.repo
+ENV GPG_KEY http://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS
+ENV YUM_REPO_ADDR http://mirrors.aliyun.com/centos
+
 # create directories
 RUN mkdir -p /home/pkgs/; mkdir -p /usr/local/python3
 
 # install epel source
 RUN yum install -y epel-release
+
+# create your own repo
+RUN echo -e "[aliyun-base]\nname=aliyun-base\nbaseurl=${YUM_REPO_ADDR}/\$releasever/os/\$basearch/\nenabled=1\ngpgcheck=0\ngpgkey=${GPG_KEY}-\$releasever\n" >> ${MY_YUM_REPO}
+RUN echo -e "[aliyun-extras]\nname=aliyun-extras\nbaseurl=${YUM_REPO_ADDR}/\$releasever/extras/\$basearch/\nenabled=1\ngpgcheck=0\ngpgkey=${GPG_KEY}-\$releasever\n" >> ${MY_YUM_REPO}
+RUN echo -e "[aliyun-updates]\nname=aliyun-updates\nbaseurl=${YUM_REPO_ADDR}/\$releasever/updates/\$basearch/\nenabled=1\ngpgcheck=0\ngpgkey=${GPG_KEY}-\$releasever\n" >> ${MY_YUM_REPO}
+RUN echo -e "[aliyun-centosplus]\nname=aliyun-centosplus\nbaseurl=${YUM_REPO_ADDR}/\$releasever/centosplus/\$basearch/\nenabled=1\ngpgcheck=0\ngpgkey=${GPG_KEY}-\$releasever\n" >> ${MY_YUM_REPO}
 
 # clear cache
 RUN yum clean all
@@ -50,7 +61,9 @@ RUN ln -s /usr/bin/pip3 /usr/bin/pip
 
 # enable yum
 RUN sed -i 's@#!/usr/bin/python@#!/usr/bin/python2@g' /usr/bin/yum
+RUN sed -i 's@#! /usr/bin/python@#!/usr/bin/python2@g' /usr/bin/yum
 RUN sed -i 's@#!/usr/bin/python@#!/usr/bin/python2@g' /usr/libexec/urlgrabber-ext-down
+RUN sed -i 's@#! /usr/bin/python@#!/usr/bin/python2@g' /usr/libexec/urlgrabber-ext-down
 
 # update packages
 RUN yum update -y
