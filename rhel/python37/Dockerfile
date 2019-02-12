@@ -79,4 +79,9 @@ RUN yum update -y
 # upgrade pip
 RUN pip install -U pip
 
+# expose some port
+EXPOSE 22
+EXPOSE 80
+EXPOSE 443
+
 CMD [ "/usr/sbin/init" ]
