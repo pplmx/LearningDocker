@@ -25,11 +25,8 @@ RUN echo -e "[aliyun-extras]\nname=aliyun-extras\nbaseurl=${YUM_REPO_ADDR}/\$rel
 RUN echo -e "[aliyun-updates]\nname=aliyun-updates\nbaseurl=${YUM_REPO_ADDR}/\$releasever/updates/\$basearch/\nenabled=1\ngpgcheck=0\ngpgkey=${GPG_KEY}-\$releasever\n" >> ${MY_YUM_REPO}
 RUN echo -e "[aliyun-centosplus]\nname=aliyun-centosplus\nbaseurl=${YUM_REPO_ADDR}/\$releasever/centosplus/\$basearch/\nenabled=1\ngpgcheck=0\ngpgkey=${GPG_KEY}-\$releasever\n" >> ${MY_YUM_REPO}
 
-# clear cache
-RUN yum clean all
-
-# generate cache
-RUN yum makecache
+# clear cache & generate cache
+RUN yum clean all; yum makecache
 
 # install wget to download something
 RUN yum install -y wget
@@ -68,13 +65,16 @@ RUN sed -i 's@#! /usr/bin/python@#!/usr/bin/python2@g' /usr/libexec/urlgrabber-e
 # update packages
 RUN yum update -y
 
+# change pip source
+RUN mkdir $HOME/.pip/; touch $HOME/.pip/pip.conf
+RUN echo -e "[global]\ntrusted-host=mirrors.aliyun.com\nindex-url=https://mirrors.aliyun.com/pypi/simple/" >> $HOME/.pip/pip.conf
+
 # upgrade pip
 RUN pip install -U pip
 
-# expose some port
-EXPOSE 22
-EXPOSE 80
-EXPOSE 443
+# expose some common port
+# ssh; http; https; mysql; mongodb; 
+EXPOSE 22 80 443 3306 27017
 
-CMD [ "bash" ]
-
+# to enable systemd
+CMD [ "/usr/sbin/init" ]
