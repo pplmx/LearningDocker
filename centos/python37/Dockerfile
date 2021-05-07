@@ -4,7 +4,7 @@
 ############################################################
 
 # Set the base image to centos
-FROM centos:7
+FROM centos:8
 
 LABEL maintaner="purplemystic"
 
