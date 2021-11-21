@@ -1,3 +1,6 @@
+# Custom
+**/.scannerwork
+
 # IntelliJ project files
 .idea
 out
@@ -5,8 +8,4 @@ gen
 
 
 # Visual Studio Code
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
+.vscode
