@@ -14,7 +14,7 @@ services:
         ports:
             - "27017:27017"
         healthcheck:
-            test: echo 'db.runCommand("ping").ok' | mongo 10.10.10.60:27017/test --quiet
+            test: echo 'db.runCommand("ping").ok' | mongo 127.0.0.1:27017/test --quiet
             interval: 30s
             timeout: 10s
             retries: 3
@@ -30,7 +30,7 @@ services:
             - ME_CONFIG_BASICAUTH_USERNAME=admin
             - ME_CONFIG_BASICAUTH_PASSWORD=admin
         volumes:
-            - mongodb-data
+            - mongodb-data:/data/db
         depends_on:
             - mongodb
         networks:
@@ -38,7 +38,7 @@ services:
         ports:
             - "8081:8081"
         healthcheck:
-            test: wget --quiet --tries=3 --spider http://admin:admin@10.10.10.60:8081 || exit 1
+            test: wget --quiet --tries=3 --spider http://admin:admin@127.0.0.1:8081 || exit 1
             interval: 30s
             timeout: 10s
             retries: 3
