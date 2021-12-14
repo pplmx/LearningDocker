@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+    gerrit:
+        image: gerritcodereview/gerrit
+        ports:
+            - "29418:29418"
+            - "80:8080"
+        depends_on:
+            - ldap
+        volumes:
+            - /opt/gerrit/etc:/var/gerrit/etc
+            - /opt/gerrit/git:/var/gerrit/git
+            - /opt/gerrit/db:/var/gerrit/db
+            - /opt/gerrit/index:/var/gerrit/index
+            - /opt/gerrit/cache:/var/gerrit/cache
+        environment:
+            - CANONICAL_WEB_URL=http://localhost
+#        command: init
+    ldap:
+        image: osixia/openldap
+        ports:
+            - "389:389"
+            - "636:636"
+        environment:
+            - LDAP_ADMIN_PASSWORD=secret
+        volumes:
+            - /opt/gerrit/ldap/var:/var/lib/ldap
+            - /opt/gerrit/ldap/etc:/etc/ldap/slapd.d
+
+    ldap-admin:
+        image: osixia/phpldapadmin
+        ports:
+            - "6443:443"
+        environment:
+            - PHPLDAPADMIN_LDAP_HOSTS=ldap
