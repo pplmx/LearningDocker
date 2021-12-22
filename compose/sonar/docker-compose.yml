@@ -2,7 +2,10 @@ version: "3"
 
 services:
     sonarqube:
-        image: sonarqube:community
+        # Uncomment the following `build` line and comment the `image` line, if you wanna analysis the javascript, css, etc.
+        # then run `docker compose build && docker compose up -d`
+        # build: ./node
+        image: sonarqube
         platform: linux/x86_64
         depends_on:
             - db
@@ -10,8 +13,6 @@ services:
             SONAR_JDBC_URL: jdbc:postgresql://db:5432/sonar
             SONAR_JDBC_USERNAME: sonar
             SONAR_JDBC_PASSWORD: sonar
-            # if macos, uncomment the following line
-            # SONAR_SEARCH_JAVAADDITIONALOPTS: "-Dbootstrap.system_call_filter=false"
         volumes:
             - sonarqube_data:/opt/sonarqube/data
             - sonarqube_extensions:/opt/sonarqube/extensions
