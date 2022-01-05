@@ -4,6 +4,8 @@ services:
         image: redislabs/redismod
         ports:
             - "6379:6379"
+        volumes:
+            - redis_data:/data
     redisinsight:
         image: redislabs/redisinsight
         ports:
@@ -11,4 +13,5 @@ services:
         volumes:
             - redisinsight_db:/db
 volumes:
+    redis_data:
     redisinsight_db:
