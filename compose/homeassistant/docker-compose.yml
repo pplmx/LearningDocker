@@ -1,7 +1,6 @@
 version: Compose specification
 services:
     homeassistant:
-        container_name: homeassistant
         image: "ghcr.io/home-assistant/home-assistant:stable"
         volumes:
             - /opt/homeassistant/:/config
