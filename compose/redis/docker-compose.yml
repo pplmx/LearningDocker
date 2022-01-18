@@ -1,8 +1,18 @@
-version: '3'
-
+version: Compose specification
 services:
     redis:
-        image: redis:alpine
-        command: redis-server
+        image: redislabs/redismod
         ports:
             - "6379:6379"
+        volumes:
+            - /opt/redis/data:/data
+        restart: always
+    redisinsight:
+        image: redislabs/redisinsight
+        ports:
+            - "8001:8001"
+        volumes:
+            - redisinsight_db:/db
+        restart: always
+volumes:
+    redisinsight_db:
