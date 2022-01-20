@@ -1,12 +1,13 @@
 version: Compose specification
 services:
     homeassistant:
-        image: "ghcr.io/home-assistant/home-assistant:stable"
+        image: "ghcr.io/home-assistant/home-assistant"
         volumes:
             - /opt/homeassistant/:/config
             - /etc/localtime:/etc/localtime:ro
         privileged: true
         network_mode: host
+        restart: always
         deploy:
             replicas: 2
             restart_policy:
