@@ -3,6 +3,11 @@
 ## start a sonar server
 
 ```shell
+# Maybe you should set this config before starting a sonar container
+sudo sysctl -w vm.max_map_count=262144
+sudo echo "vm.max_map_count = 262144" >> /etc/sysctl.conf
+sudo systemctl restart docker
+
 docker compose up -d
 ```
 
