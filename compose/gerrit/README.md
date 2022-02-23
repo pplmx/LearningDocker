@@ -3,7 +3,7 @@
 ## prerequisite
 
 ```shell
-sudo install -d /opt/gerrit; cd /opt/gerrit; sudo install -d etc git db index cache ldap/var ldap/etc
+sudo install -d /opt/gerrit; cd /opt/gerrit; sudo install -d etc git db index cache plugins ldap/var ldap/etc
 
 # The content is from the file of the same name in the current directory
 sudo touch etc/gerrit.config etc/secure.config

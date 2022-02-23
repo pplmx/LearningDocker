@@ -8,16 +8,16 @@ services:
             - "80:8080"
         depends_on:
             - ldap
-        restart: always
         volumes:
             - /opt/gerrit/etc:/var/gerrit/etc
             - /opt/gerrit/git:/var/gerrit/git
             - /opt/gerrit/db:/var/gerrit/db
             - /opt/gerrit/index:/var/gerrit/index
             - /opt/gerrit/cache:/var/gerrit/cache
+            - /opt/gerrit/plugins:/var/gerrit/plugins
         environment:
             - CANONICAL_WEB_URL=http://localhost
-#        command: init
+        command: init
     ldap:
         image: osixia/openldap
         ports:
