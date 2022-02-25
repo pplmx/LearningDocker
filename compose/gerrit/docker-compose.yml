@@ -3,6 +3,7 @@ version: '3.8'
 services:
     gerrit:
         image: gerritcodereview/gerrit
+        user: root
         ports:
             - "29418:29418"
             - "80:8080"
