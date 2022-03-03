@@ -17,8 +17,9 @@ services:
             - /opt/gerrit/cache:/var/gerrit/cache
             - /opt/gerrit/plugins:/var/gerrit/plugins
         environment:
-            - CANONICAL_WEB_URL=http://localhost
+            - CANONICAL_WEB_URL=https://aurora.inf
         command: init
+
     ldap:
         image: osixia/openldap
         ports:
@@ -38,3 +39,16 @@ services:
         restart: always
         environment:
             - PHPLDAPADMIN_LDAP_HOSTS=ldap
+
+    nginx:
+        image: nginx:1.21
+        ports:
+            - "80:80"
+            - "443:443"
+        restart: always
+        privileged: true
+        environment:
+            - TZ=Asia/Shanghai
+        volumes:
+            - /opt/nginx:/etc/nginx
+            - /var/log/nginx:/var/log/nginx
