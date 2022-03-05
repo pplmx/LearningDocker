@@ -1,0 +1,15 @@
+version: Compose specification
+
+services:
+    nginx:
+        image: nginx:1.21
+        ports:
+            - "80:80"
+            - "443:443"
+        restart: always
+        privileged: true
+        environment:
+            - TZ=Asia/Shanghai
+        volumes:
+            - /opt/nginx:/etc/nginx
+            - /var/log/nginx:/var/log/nginx

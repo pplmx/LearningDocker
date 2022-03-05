@@ -6,7 +6,7 @@ services:
         user: root
         ports:
             - "29418:29418"
-            - "80:8080"
+            - "18080:8080"
         depends_on:
             - ldap
         volumes:
@@ -17,8 +17,9 @@ services:
             - /opt/gerrit/cache:/var/gerrit/cache
             - /opt/gerrit/plugins:/var/gerrit/plugins
         environment:
-            - CANONICAL_WEB_URL=https://aurora.inf
-        command: init
+            - CANONICAL_WEB_URL=http://aurora.inf
+            - HTTPD_LISTEN_URL=proxy-http://*:8080
+        #command: init
 
     ldap:
         image: osixia/openldap
