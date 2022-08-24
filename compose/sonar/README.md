@@ -9,23 +9,23 @@
 > by running the following commands as root on the host:
 
 ```shell
-# sudo echo "vm.max_map_count = 262144" >> /etc/sysctl.conf
 sysctl -w vm.max_map_count=524288
 sysctl -w fs.file-max=131072
 ulimit -n 131072
 ulimit -u 8192
 ```
 
-## start a sonar server
+## Start a SonarQube Server
 
 ```shell
 # after configuration, restart the docker daemon
 sudo systemctl restart docker
 
 docker compose up -d
+# docker compose build && docker compose up -d
 ```
 
-## start a sonar scanner
+## Start a Sonar Scanner
 
 - create a `sonar-project.properties` at the root dir of your repo, like this:
 ```properties
@@ -71,4 +71,13 @@ docker run \
     -Dsonar.sonar.sources="/usr/src" \
     -Dsonar.exclusions="**/*_test.go,**/vendor/**" \
     -Dsonar.sonar.sourceEncoding=UTF-8
+```
+
+> Or using the command line directly:
+```shell
+sonar-scanner \
+    -Dsonar.projectKey=Aurora \
+    -Dsonar.sources=. \
+    -Dsonar.host.url=http://192.168.91.37:9000 \
+    -Dsonar.login=sqp_d2a893edf42a9e5ccb72cdcd77a2f1b391f4f525
 ```
