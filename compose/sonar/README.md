@@ -56,10 +56,13 @@ docker run \
 
 > If you don't want to create `sonar-project.properties`, you can follow this:
 ```shell
+SONARQUBE_URL="http://127.0.0.1:9000/"
+SONARQUBE_TOKEN=""
+YOUR_REPO=""
 docker run \
     --rm \
-    -e SONAR_HOST_URL="http://${SONARQUBE_URL}" \
-    -e SONAR_LOGIN="849d0a95e7572891592272b917d82a55586cd785" \
+    -e SONAR_HOST_URL="${SONARQUBE_URL}" \
+    -e SONAR_LOGIN="${SONARQUBE_TOKEN}" \
     -v "${YOUR_REPO}:/usr/src" \
     sonarsource/sonar-scanner-cli \
     -Dsonar.projectKey=individual.mystic \
