@@ -1,11 +1,25 @@
 # SonarQube
 
+## Docker Host Requirements
+> Because SonarQube uses an embedded Elasticsearch,
+> make sure that your Docker host configuration complies with the Elasticsearch production mode requirements
+> and File Descriptors configuration.
+
+> For example, on Linux, you can set the recommended values for the current session
+> by running the following commands as root on the host:
+
+```shell
+# sudo echo "vm.max_map_count = 262144" >> /etc/sysctl.conf
+sysctl -w vm.max_map_count=524288
+sysctl -w fs.file-max=131072
+ulimit -n 131072
+ulimit -u 8192
+```
+
 ## start a sonar server
 
 ```shell
-# Maybe you should set this config before starting a sonar container
-sudo sysctl -w vm.max_map_count=262144
-sudo echo "vm.max_map_count = 262144" >> /etc/sysctl.conf
+# after configuration, restart the docker daemon
 sudo systemctl restart docker
 
 docker compose up -d
@@ -13,7 +27,7 @@ docker compose up -d
 
 ## start a sonar scanner
 
-1. create a `sonar-project.properties` at the root dir of your repo, like this:
+- create a `sonar-project.properties` at the root dir of your repo, like this:
 ```properties
 # 172.17.0.1 is a docker0 ip, due to the sonar server starts with the docker.
 sonar.host.url=http://172.17.0.1:9000
@@ -32,7 +46,7 @@ sonar.test.inclusions=**/*_test.go
 sonar.test.exclusions=**/vendor/**
 ```
 
-2. start a scanner
+- start a scanner
 ```shell
 docker run \
     --rm \

@@ -6,7 +6,6 @@ services:
         # then run `docker compose build && docker compose up -d`
         # build: ./node
         image: sonarqube
-        platform: linux/x86_64
         hostname: sonarqube
         container_name: sonarqube
         depends_on:
@@ -27,7 +26,6 @@ services:
         restart: unless-stopped
     db:
         image: postgres:14
-        platform: linux/x86_64
         hostname: postgresql
         container_name: postgresql
         environment:
