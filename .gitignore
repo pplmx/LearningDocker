@@ -1,5 +1,6 @@
 # Custom
 **/.scannerwork
+compose/traefik/letsencrypt/
 
 # IntelliJ project files
 .idea
