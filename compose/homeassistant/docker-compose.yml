@@ -1,14 +1,16 @@
 version: Compose specification
 services:
     homeassistant:
+        container_name: ha
         image: "ghcr.io/home-assistant/home-assistant"
         privileged: true
         network_mode: host
         restart: unless-stopped
         volumes:
-            - /opt/homeassistant/:/config
+            - ./config:/config
             - /etc/localtime:/etc/localtime:ro
     nginx:
+        container_name: nginx
         image: nginx
         ports:
             - "80:80"
