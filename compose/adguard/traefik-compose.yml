@@ -1,0 +1,11 @@
+version: Compose specification
+
+services:
+    traefik:
+        image: traefik:2.9
+        ports:
+            - "80:80"
+            - "8080:8080"
+        volumes:
+            - "./traefik.yml:/etc/traefik/traefik.yml"
+            - "/var/run/docker.sock:/var/run/docker.sock:ro"

@@ -1,7 +1,7 @@
 version: Compose specification
 
 services:
-    adguard:
+    guard:
         image: adguard/adguardhome
         ports:
           - 53:53/tcp
