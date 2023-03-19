@@ -10,7 +10,7 @@ providers:
     docker:
         exposedByDefault: false
     file:
-        # location in docker
+        # location in traefik container
         filename: /traefik.yml
 ---
 ### Dynamic Configuration
@@ -22,8 +22,8 @@ http:
             priority: 1000
             entryPoints:
                 - web
-    services:
-        dashboard:
-            loadbalancer:
-                server:
-                    port: 8080
+#    services:
+#        dashboard:
+#            loadbalancer:
+#                server:
+#                    port: 8080
