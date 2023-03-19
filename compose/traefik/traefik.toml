@@ -1,0 +1,22 @@
+[log]
+level = "INFO"
+
+[api]
+dashboard = true
+insecure = true
+
+[providers.docker]
+exposedByDefault = false
+
+[entryPoints]
+[entryPoints.web]
+address = ":80"
+
+[http.routers]
+[http.routers.dashboard]
+rule = "Host(`traefik.local`)"
+service = "dashboard@internal"
+
+[http.routers.api]
+rule = "Host(`traefik.local`) && PathPrefix(`/api`)"
+service = "api@internal"

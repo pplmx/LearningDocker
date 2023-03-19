@@ -1,33 +1,11 @@
 version: Compose specification
 
 services:
-
     traefik:
-        image: "traefik:v2.9"
-        container_name: "traefik"
-        command:
-            #- "--log.level=DEBUG"
-            - "--api.insecure=true"
-            - "--providers.docker=true"
-            - "--providers.docker.exposedbydefault=false"
-            - "--entrypoints.web.address=:80"
-            - "--entrypoints.websecure.address=:443"
-            - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
-            #- "--certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
-            - "--certificatesresolvers.myresolver.acme.email=215104920@qq.com"
-            - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+        image: traefik:2.9
         ports:
-            - "443:443"
+            - "80:80"
             - "8080:8080"
         volumes:
-            - "./letsencrypt:/letsencrypt"
+            - "./traefik.toml:/etc/traefik/traefik.toml"
             - "/var/run/docker.sock:/var/run/docker.sock:ro"
-
-    whoami:
-        image: "traefik/whoami"
-        container_name: "whoami"
-        labels:
-            - "traefik.enable=true"
-            - "traefik.http.routers.whoami.rule=Host(`whoami.docker.localhost`)"
-            - "traefik.http.routers.whoami.entrypoints=websecure"
-            - "traefik.http.routers.whoami.tls.certresolver=myresolver"
