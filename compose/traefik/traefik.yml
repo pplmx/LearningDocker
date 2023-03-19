@@ -1,0 +1,29 @@
+### Static Configuration
+log:
+    level: INFO
+api:
+    insecure: true
+entryPoints:
+    web:
+        address: :80
+providers:
+    docker:
+        exposedByDefault: false
+    file:
+        # location in docker
+        filename: /traefik.yml
+---
+### Dynamic Configuration
+http:
+    routers:
+        dashboard:
+            rule: Host(`traefik.local`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
+            service: api@internal
+            priority: 1000
+            entryPoints:
+                - web
+    services:
+        dashboard:
+            loadbalancer:
+                server:
+                    port: 8080

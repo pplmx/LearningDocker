@@ -12,3 +12,6 @@ curl -H Host:whoami.docker.localhost http://127.0.0.1
 ### Username & Password
 aurora
 3awZv1vyj6iSJHtptQsj#@
+
+## FYI
+https://developer.aliyun.com/article/951929
