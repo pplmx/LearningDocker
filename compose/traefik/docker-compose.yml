@@ -8,5 +8,7 @@ services:
             - "8080:8080"
         volumes:
             # /traefik.yml and /etc/traefik/traefik.yml are both available.
-            - "./traefik.yml:/traefik.yml"
+            - "./traefik.yml:/etc/traefik/traefik.yml"
+            # dynamic-conf dir is self-defined
+            - "./dynamic-conf:/etc/traefik/dynamic-conf"
             - "/var/run/docker.sock:/var/run/docker.sock:ro"

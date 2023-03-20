@@ -1,0 +1,8 @@
+### Dynamic Configuration
+http:
+    routers:
+        dashboard:
+            rule: Host(`traefik.local`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
+            service: api@internal
+            entryPoints:
+                - web
