@@ -8,8 +8,6 @@ entryPoints:
     web:
         address: :80
 providers:
-    docker:
-        exposedByDefault: false
     file:
         # location in traefik container
         # filename: /traefik.yml
