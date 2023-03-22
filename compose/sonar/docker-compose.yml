@@ -5,7 +5,7 @@ services:
         # Uncomment the following `build` line and comment the `image` line, if you wanna analysis the javascript, css, etc.
         # then run `docker compose build && docker compose up -d`
         # build: ./node
-        image: sonarqube
+        image: sonarqube:community
         hostname: sonarqube
         container_name: sonarqube
         depends_on:
@@ -15,14 +15,11 @@ services:
             SONAR_JDBC_USERNAME: sonar
             SONAR_JDBC_PASSWORD: sonar
         volumes:
-            - sonarqube_bundled-plugins:/opt/sonarqube/lib/bundled-plugins
-            - sonarqube_conf:/opt/sonarqube/conf
             - sonarqube_data:/opt/sonarqube/data
             - sonarqube_extensions:/opt/sonarqube/extensions
             - sonarqube_logs:/opt/sonarqube/logs
         ports:
             - "9000:9000"
-            - "9092:9092"
         restart: unless-stopped
     db:
         image: postgres:14
@@ -38,8 +35,6 @@ services:
         restart: unless-stopped
 
 volumes:
-    sonarqube_bundled-plugins:
-    sonarqube_conf:
     sonarqube_data:
     sonarqube_extensions:
     sonarqube_logs:
