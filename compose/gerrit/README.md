@@ -35,10 +35,12 @@ docker compose up -d
 
 ### Define the Gerrit administrator in OpenLDAP
 
-Login to PhpLdapAdmin on [https://localhost:6443](https://localhost:6443) using `cn=admin,dc=example,dc=org` as **username** and `secret` as **password**,
+Login to PhpLdapAdmin on [https://localhost:6443](https://localhost:6443) using `cn=admin,dc=example,dc=org` as *
+*username** and `secret` as **password**,
 and then create a new child node of type "`Courier Mail Account`" for the Gerrit Administrator
 
 Example:
+
 - Given Name: Gerrit
 - Last Name: Admin
 - Common Name: Gerrit Admin

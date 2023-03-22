@@ -1,6 +1,7 @@
 # SonarQube
 
 ## Docker Host Requirements
+
 > Because SonarQube uses an embedded Elasticsearch,
 > make sure that your Docker host configuration complies with the Elasticsearch production mode requirements
 > and File Descriptors configuration.
@@ -28,6 +29,7 @@ docker compose up -d
 ## Start a Sonar Scanner
 
 - create a `sonar-project.properties` at the root dir of your repo, like this:
+
 ```properties
 # 172.17.0.1 is a docker0 ip, due to the sonar server starts with the docker.
 sonar.host.url=http://172.17.0.1:9000
@@ -47,6 +49,7 @@ sonar.test.exclusions=**/vendor/**
 ```
 
 - start a scanner
+
 ```shell
 docker run \
     --rm \
@@ -55,6 +58,7 @@ docker run \
 ```
 
 > If you don't want to create `sonar-project.properties`, you can follow this:
+
 ```shell
 SONARQUBE_URL="http://127.0.0.1:9000/"
 SONARQUBE_TOKEN=""
@@ -74,6 +78,7 @@ docker run \
 ```
 
 > Or using the command line directly:
+
 ```shell
 sonar-scanner \
     -Dsonar.projectKey=Aurora \
