@@ -2,5 +2,5 @@
 http:
     routers:
         dashboard:
-            rule: Host(`traefik.local`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
+            rule: Host(`traefik.m.local`)
             service: api@internal

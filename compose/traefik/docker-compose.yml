@@ -12,3 +12,12 @@ services:
             # dynamic-conf dir is self-defined
             - "./dynamic-conf:/etc/traefik/dynamic-conf"
             - "/var/run/docker.sock:/var/run/docker.sock:ro"
+        networks:
+            - traefik-net
+
+networks:
+    traefik-net:
+        name: traefik-net
+        ipam:
+            config:
+                -   subnet: 172.16.238.0/24

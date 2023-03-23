@@ -6,12 +6,18 @@ services:
         privileged: true
         user: root
         ports:
-            - "8080:8080"
+            - "18888:8080"
             - "50000:50000"
         restart: always
         volumes:
             - jenkins_home:/var/jenkins_home
             - /var/run/docker.sock:/var/run/docker.sock
+        networks:
+            - traefik-net
 
 volumes:
     jenkins_home:
+
+networks:
+    traefik-net:
+        external: true

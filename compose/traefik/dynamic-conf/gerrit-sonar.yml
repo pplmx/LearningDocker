@@ -1,0 +1,20 @@
+http:
+    routers:
+        gerrit:
+            rule: "Host(`gerrit.m.local`)"
+            service: "gerrit"
+
+        sonarqube:
+            rule: "Host(`sonar.m.local`)"
+            service: "sonarqube"
+
+    services:
+        gerrit:
+            loadBalancer:
+                servers:
+                    -   url: "http://gerrit:8080"
+
+        sonarqube:
+            loadBalancer:
+                servers:
+                    -   url: "http://sonarqube:9000"
