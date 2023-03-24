@@ -1,0 +1,17 @@
+http:
+    routers:
+        frontend:
+            rule: Host(`portainer.m.local`)
+            service: frontend
+        edge:
+            rule: Host(`edge.m.local`)
+            service: edge
+    services:
+        frontend:
+            loadBalancer:
+                servers:
+                    -   url: "http://portainer:9000"
+        edge:
+            loadBalancer:
+                servers:
+                    -   url: "http://portainer:8000"

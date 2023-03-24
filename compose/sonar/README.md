@@ -1,5 +1,9 @@
 # SonarQube
 
+1. deploy the traefik first
+2. deploy the sonar
+3. access http://sonar.m.local
+
 ## Docker Host Requirements
 
 > Because SonarQube uses an embedded Elasticsearch,
