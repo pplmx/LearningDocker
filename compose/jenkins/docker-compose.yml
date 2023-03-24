@@ -6,8 +6,10 @@ services:
         privileged: true
         user: root
         ports:
-            - "18888:8080"
+            # - "18888:8080"
             - "50000:50000"
+        expose:
+            - 8080
         restart: always
         volumes:
             - jenkins_home:/var/jenkins_home
