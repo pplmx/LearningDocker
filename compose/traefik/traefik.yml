@@ -1,6 +1,6 @@
 ### Static Configuration
 log:
-    level: DEBUG
+    level: INFO
 api:
     insecure: true
     dashboard: true
