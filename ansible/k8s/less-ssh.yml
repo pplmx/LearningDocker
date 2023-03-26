@@ -1,0 +1,23 @@
+---
+-   hosts: localhost
+    tasks:
+        -   stat:
+                path: "{{ id_ed25519_file }}"
+            register: op
+
+        -   name: Generating ssh key pair
+            command: ssh-keygen -q -t ed25519 -N '' -f "{{ id_ed25519_file }}" -C "Ansible Gen"
+            when: op.stat.exists == false
+
+        -   debug:
+                msg: "Key pair already exists. Using the same key."
+            when: op.stat.exists
+
+        -   name: Copy public key to the nodes
+            command: |
+                sshpass -p "{{ root_password }}" ssh-copy-id -f -i "{{ id_ed25519_file }}" -o StrictHostKeyChecking=no root@"{{ item }}"
+            with_items:
+                - "{{ nodes }}"
+
+    vars_files:
+        - config.yml

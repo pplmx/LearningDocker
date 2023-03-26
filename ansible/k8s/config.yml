@@ -1,0 +1,7 @@
+---
+id_ed25519_file: "~/.ssh/ansible_ed25519"
+root_password1: "password"
+nodes:
+    - 1.2.3.4
+    - 5.6.7.8
+    - 9.8.7.6

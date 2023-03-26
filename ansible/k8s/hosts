@@ -1,0 +1,5 @@
+[masters]
+master ansible_host=81.69.248.123 ansible_user=root ansible_ssh_private_key_file=~/.ssh/ansible_ed25519
+
+[workers]
+worker1 ansible_host=106.14.41.98 ansible_user=root ansible_ssh_private_key_file=~/.ssh/ansible_ed25519
