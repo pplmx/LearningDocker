@@ -1,19 +1,24 @@
 http:
     routers:
+        ldapadmin:
+            rule: "Host(`ldap.m.local`)"
+            service: "ldapadmin"
         gerrit:
             rule: "Host(`gerrit.m.local`)"
             service: "gerrit"
-
         sonarqube:
             rule: "Host(`sonar.m.local`)"
             service: "sonarqube"
 
     services:
+        ldapadmin:
+            loadBalancer:
+                servers:
+                    -   url: "http://ldapadmin:443"
         gerrit:
             loadBalancer:
                 servers:
                     -   url: "http://gerrit:8080"
-
         sonarqube:
             loadBalancer:
                 servers:

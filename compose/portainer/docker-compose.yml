@@ -8,6 +8,9 @@ services:
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
             - portainer_data:/data
+        expose:
+            - 8000
+            - 9000
         networks:
             - traefik-net
 

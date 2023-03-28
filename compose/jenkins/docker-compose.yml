@@ -5,11 +5,9 @@ services:
         container_name: jenkins
         privileged: true
         user: root
-        ports:
-            # - "18888:8080"
-            - "50000:50000"
         expose:
             - 8080
+            - 50000
         restart: always
         volumes:
             - jenkins_home:/var/jenkins_home

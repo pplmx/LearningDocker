@@ -18,6 +18,17 @@ sysctl -w vm.max_map_count=524288
 sysctl -w fs.file-max=131072
 ulimit -n 131072
 ulimit -u 8192
+
+# Permanent
+vim /etc/sysctl.conf
+vm.max_map_count = 524288
+fs.file-max = 131072
+
+vim /etc/security/limits.conf
+* soft nofile 131072
+* hard nofile 131072
+* soft nproc 8192
+* hard nproc 8192
 ```
 
 ## Start a SonarQube Server
