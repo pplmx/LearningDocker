@@ -12,3 +12,4 @@ providers:
         # location in traefik container
         # filename: /traefik.yml
         directory: /etc/traefik/dynamic-conf
+        watch: true
