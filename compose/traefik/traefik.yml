@@ -1,8 +1,8 @@
 ### Static Configuration
 log:
     level: INFO
-accessLog:
-    filePath: /var/log/access.log
+#accessLog:
+#    filePath: /var/log/access.log
 api:
     insecure: true
     dashboard: true
