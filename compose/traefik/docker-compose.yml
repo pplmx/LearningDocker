@@ -5,7 +5,10 @@ services:
         image: traefik:3.0
         ports:
             - "80:80"
+            - "443:443"
             - "8080:8080"
+        environment:
+            - TZ=Asia/Shanghai
         volumes:
             # /traefik.yml and /etc/traefik/traefik.yml are both available.
             - "./traefik.yml:/etc/traefik/traefik.yml"

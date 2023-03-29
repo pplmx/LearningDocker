@@ -14,7 +14,7 @@ http:
         ldapadmin:
             loadBalancer:
                 servers:
-                    -   url: "http://ldapadmin:443"
+                    -   url: "https://ldapadmin:443"
         gerrit:
             loadBalancer:
                 servers:

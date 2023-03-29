@@ -6,7 +6,8 @@ services:
         user: root
         ports:
             - "29418:29418"
-            - "18080:8080"
+        expose:
+            - 8080
         depends_on:
             - ldap
         volumes:
@@ -19,7 +20,9 @@ services:
         environment:
             - CANONICAL_WEB_URL=http://gerrit.m.local
             - HTTPD_LISTEN_URL=proxy-http://*:8080
-        #command: init
+        networks:
+            - traefik-net
+        command: init
 
     ldap:
         image: osixia/openldap
@@ -32,6 +35,8 @@ services:
         volumes:
             - /opt/gerrit/ldap/var:/var/lib/ldap
             - /opt/gerrit/ldap/etc:/etc/ldap/slapd.d
+        networks:
+            - traefik-net
 
     ldapadmin:
         image: osixia/phpldapadmin
@@ -40,3 +45,9 @@ services:
         restart: always
         environment:
             - PHPLDAPADMIN_LDAP_HOSTS=ldap
+        networks:
+            - traefik-net
+
+networks:
+    traefik-net:
+        external: true
