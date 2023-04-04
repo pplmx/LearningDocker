@@ -10,12 +10,15 @@ services:
             - 50000
         restart: always
         extra_hosts:
-            # config for gerrit and sonar, if no, remove them
+            # config for gerrit, sonar, ldap. if no, remove them
             - gerrit.m.local:192.168.91.103
             - sonar.m.local:192.168.91.103
+            - ldap.m.local:192.168.91.103
         volumes:
             - jenkins_home:/var/jenkins_home
             - /var/run/docker.sock:/var/run/docker.sock
+        environment:
+            - TZ=Asia/Shanghai
         networks:
             - traefik-net
 
