@@ -1,6 +1,6 @@
 # Custom
+**/certs
 **/.scannerwork
-compose/traefik/letsencrypt/
 compose/homeassistant/config/
 
 # IntelliJ project files
