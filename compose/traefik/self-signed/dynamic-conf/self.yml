@@ -1,0 +1,19 @@
+### Dynamic Configuration
+tls:
+    certificates:
+        -   certFile: /certs/domain.cert
+            keyFile: /certs/domain.key
+            stores:
+                - default
+    # Specifying the default certificate
+    stores:
+        default:
+            defaultCertificate:
+                certFile: /certs/domain.cert
+                keyFile: /certs/domain.key
+http:
+    routers:
+        dashboard:
+            rule: Host(`traefik.m.local`)
+            service: api@internal
+            tls: { }
