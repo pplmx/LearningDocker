@@ -73,7 +73,7 @@ RUN echo -e "[global]\ntrusted-host=mirrors.aliyun.com\nindex-url=https://mirror
 RUN pip install -U pip
 
 # expose some common port
-# ssh; http; https; mysql; mongodb; 
+# ssh; http; https; mysql; mongodb;
 EXPOSE 22 80 443 3306 27017
 
 # to enable systemd
