@@ -1,0 +1,12 @@
+http:
+    routers:
+        fastapi:
+            rule: "Host(`fastapi.m.local`)"
+            service: "fastapi"
+            tls: { }
+
+    services:
+        fastapi:
+            loadBalancer:
+                servers:
+                    -   url: "http://fastapi:8080"
