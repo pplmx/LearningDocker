@@ -10,20 +10,23 @@ services:
         environment:
             - LDAP_ADMIN_PASSWORD=secret
         volumes:
-            - /opt/gerrit/ldap/var:/var/lib/ldap
-            - /opt/gerrit/ldap/etc:/etc/ldap/slapd.d
+            - ldap:/var/lib/ldap
+            - slapd:/etc/ldap/slapd.d
         networks:
             - traefik-net
 
     ldapadmin:
         image: osixia/phpldapadmin
-        ports:
-            - "6443:443"
         restart: always
+        expose:
+            - 443
         environment:
             - PHPLDAPADMIN_LDAP_HOSTS=ldap
         networks:
             - traefik-net
+volumes:
+    ldap:
+    slapd:
 
 networks:
     traefik-net:
