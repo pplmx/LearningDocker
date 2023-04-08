@@ -1,0 +1,12 @@
+http:
+    routers:
+        jenkins:
+            rule: "Host(`jenkins.m.local`)"
+            service: "jenkins"
+            tls: { }
+
+    services:
+        jenkins:
+            loadBalancer:
+                servers:
+                    -   url: "http://jenkins:8080"

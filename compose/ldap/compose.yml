@@ -18,8 +18,8 @@ services:
     ldapadmin:
         image: osixia/phpldapadmin
         restart: always
-        expose:
-            - 443
+        ports:
+            - 6443:443
         environment:
             - PHPLDAPADMIN_LDAP_HOSTS=ldap
         networks:
