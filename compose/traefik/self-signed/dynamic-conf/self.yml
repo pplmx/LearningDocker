@@ -3,14 +3,6 @@ tls:
     certificates:
         -   certFile: /certs/cert.pem
             keyFile: /certs/key.pem
-            stores:
-                - default
-    # Specifying the default certificate
-    stores:
-        default:
-            defaultCertificate:
-                certFile: /certs/cert.pem
-                keyFile: /certs/key.pem
 http:
     routers:
         dashboard:

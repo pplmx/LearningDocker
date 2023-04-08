@@ -1,0 +1,36 @@
+[ ca ]
+default_ca = CA_default
+
+[ CA_default ]
+default_days = 365
+default_md = sha256
+
+[ req ]
+prompt                 = no
+default_bits           = 4096
+distinguished_name     = req_distinguished_name
+x509_extensions        = v3_ca
+req_extensions         = v3_req
+
+[ req_distinguished_name ]
+C = CN
+ST = SH
+L = Shanghai
+O = Individual
+OU = MyStudio
+CN = m.local
+
+[ v3_ca ]
+subjectKeyIdentifier   = hash
+authorityKeyIdentifier = keyid:always,issuer:always
+basicConstraints       = CA:true
+
+[ v3_req ]
+basicConstraints       = CA:FALSE
+keyUsage               = nonRepudiation, digitalSignature, keyEncipherment
+extendedKeyUsage       = serverAuth, clientAuth
+subjectAltName         = @alt_names
+
+[alt_names]
+DNS.1 = m.local
+DNS.1 = *.m.local
