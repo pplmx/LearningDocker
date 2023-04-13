@@ -1,0 +1,12 @@
+http:
+    routers:
+        ldap:
+            rule: "Host(`ldap.m.local`)"
+            service: "ldap"
+            tls: { }
+
+    services:
+        ldap:
+            loadBalancer:
+                servers:
+                    -   url: "http://ldapadmin"

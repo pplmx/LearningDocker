@@ -3,9 +3,6 @@ version: Compose specification
 services:
     ldap:
         image: osixia/openldap
-        ports:
-            - "389:389"
-            - "636:636"
         restart: always
         environment:
             - LDAP_ADMIN_PASSWORD=secret
@@ -18,10 +15,12 @@ services:
     ldapadmin:
         image: osixia/phpldapadmin
         restart: always
-        ports:
-            - 6443:443
         environment:
             - PHPLDAPADMIN_LDAP_HOSTS=ldap
+            # if configure https by traefik, you need to configure the following two lines
+            # if not, remove them
+            - VIRTUAL_HOST=ldap.m.local
+            - PHPLDAPADMIN_HTTPS=false
         networks:
             - traefik-net
 volumes:
