@@ -5,8 +5,6 @@ services:
         image: traefik:3.0
         ports:
             - "80:80"
-            - "443:443"
-            - "8080:8080"
         environment:
             - TZ=Asia/Shanghai
         volumes:
