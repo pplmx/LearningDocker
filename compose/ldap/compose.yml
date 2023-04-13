@@ -5,11 +5,11 @@ services:
         image: osixia/openldap
         restart: always
         environment:
-            - LDAP_ORGANISATION=Aurora Inc.
-            # if LDAP_DOMAIN=yoooo.fun, the login DN will be "cn=admin,dc=yoooo,dc=fun"
+            - LDAP_ORGANISATION=Chaos Inc.
+            # if LDAP_DOMAIN=chaos.io, the login DN will be "cn=admin,dc=chaos,dc=io"
             # LDAP_DOMAIN default value is "example.org"
             # so default login DN is "cn=admin,dc=example,dc=org"
-            - LDAP_DOMAIN=yoooo.fun
+            - LDAP_DOMAIN=chaos.io
             - LDAP_ADMIN_PASSWORD=secret
         volumes:
             - ldap:/var/lib/ldap
