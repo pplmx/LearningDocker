@@ -14,7 +14,11 @@ install -d certs
 If you want to solve this problem, then `mkcert` is the best choice.
 
 ```shell
-mkcert -key-file certs/key.pem -cert-file certs/cert.pem x.internal *.x.internal
+# directly gen certs at the current dir
+# mkcert example.com "*.example.com" example.test localhost 127.0.0.1 ::1
+
+# specify the cert out
+mkcert -key-file certs/key.pem -cert-file certs/cert.pem x.internal "*.x.internal"
 mkcert -install
 ```
 
