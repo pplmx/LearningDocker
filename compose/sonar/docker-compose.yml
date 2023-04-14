@@ -1,10 +1,7 @@
-version: "3.9"
+version: Compose specification
 
 services:
     sonarqube:
-        # Uncomment the following `build` line and comment the `image` line, if you wanna analysis the javascript, css, etc.
-        # then run `docker compose build && docker compose up -d`
-        # build: ./node
         image: sonarqube:community
         hostname: sonarqube
         container_name: sonarqube
@@ -18,9 +15,9 @@ services:
             # HERE LDAP server from the gerrit compose
             SONAR_SECURITY_REALM: LDAP
             LDAP_URL: ldap://ldap
-            LDAP_BINDDN: cn=admin,dc=example,dc=org
+            LDAP_BINDDN: cn=admin,dc=chaos,dc=io
             LDAP_BINDPASSWORD: secret
-            LDAP_USER_BASEDN: dc=example,dc=org
+            LDAP_USER_BASEDN: dc=chaos,dc=io
             LDAP_USER_REQUEST: (&(objectClass=person)(uid={login}))
         volumes:
             - sonarqube_data:/opt/sonarqube/data

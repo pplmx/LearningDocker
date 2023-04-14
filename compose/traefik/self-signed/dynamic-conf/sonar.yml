@@ -1,0 +1,12 @@
+http:
+    routers:
+        sonarqube:
+            rule: "Host(`sonar.x.internal`)"
+            service: "sonarqube"
+            tls: { }
+
+    services:
+        sonarqube:
+            loadBalancer:
+                servers:
+                    -   url: "http://sonarqube:9000"
