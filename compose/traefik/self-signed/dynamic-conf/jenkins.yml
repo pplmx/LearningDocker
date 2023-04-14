@@ -1,7 +1,7 @@
 http:
     routers:
         jenkins:
-            rule: "Host(`jenkins.x.io`)"
+            rule: "Host(`jenkins.x.internal`)"
             service: "jenkins"
             tls: { }
 

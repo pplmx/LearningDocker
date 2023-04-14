@@ -2,5 +2,5 @@
 http:
     routers:
         dashboard:
-            rule: Host(`traefik.x.io`)
+            rule: Host(`traefik.x.internal`)
             service: api@internal

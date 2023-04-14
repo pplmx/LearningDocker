@@ -1,7 +1,7 @@
 http:
     routers:
         fastapi:
-            rule: "Host(`fastapi.x.io`)"
+            rule: "Host(`fastapi.x.internal`)"
             service: "fastapi"
             tls: { }
 

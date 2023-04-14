@@ -1,13 +1,13 @@
 http:
     routers:
         ldapadmin:
-            rule: "Host(`ldap.x.io`)"
+            rule: "Host(`ldap.x.internal`)"
             service: "ldapadmin"
         gerrit:
-            rule: "Host(`gerrit.x.io`)"
+            rule: "Host(`gerrit.x.internal`)"
             service: "gerrit"
         sonarqube:
-            rule: "Host(`sonar.x.io`)"
+            rule: "Host(`sonar.x.internal`)"
             service: "sonarqube"
 
     services:

@@ -2,7 +2,7 @@
 
 1. deploy the traefik first
 2. deploy the jenkins
-3. access http://jenkins.x.io
+3. access http://jenkins.x.internal
 
 ```shell
 # View the generated administrator password to log in the first time.

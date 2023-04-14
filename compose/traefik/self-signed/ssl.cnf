@@ -9,13 +9,13 @@ ST = SH
 L  = Shanghai
 O  = Individual
 OU = MyStudio
-CN = x.io
+CN = x.internal
 
 [ v3_req ]
 subjectAltName = @alt_names
 
 [alt_names]
-DNS.1  = x.io
-DNS.2  = *.x.io
+DNS.1  = x.internal
+DNS.2  = *.x.internal
 IP.7   = 127.0.0.1
 DNS.11 = localhost

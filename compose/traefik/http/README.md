@@ -1,6 +1,6 @@
 # Traefik
 
-access http://traefik.x.io
+access http://traefik.x.internal
 
 ## FYI
 

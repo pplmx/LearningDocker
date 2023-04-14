@@ -1,10 +1,10 @@
 http:
     routers:
         frontend:
-            rule: Host(`portainer.x.io`)
+            rule: Host(`portainer.x.internal`)
             service: frontend
         edge:
-            rule: Host(`edge.x.io`)
+            rule: Host(`edge.x.internal`)
             service: edge
     services:
         frontend:

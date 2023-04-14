@@ -2,7 +2,7 @@
 
 1. deploy the traefik first
 2. deploy the sonar
-3. access http://sonar.x.io
+3. access http://sonar.x.internal
 
 ## Docker Host Requirements
 

@@ -14,7 +14,7 @@ install -d certs
 If you want to solve this problem, then `mkcert` is the best choice.
 
 ```shell
-mkcert -key-file certs/key.pem -cert-file certs/cert.pem x.io *.x.io
+mkcert -key-file certs/key.pem -cert-file certs/cert.pem x.internal *.x.internal
 mkcert -install
 ```
 
@@ -36,14 +36,14 @@ openssl req -x509 -new -nodes -days 365\
 
 # Option 2: use command line arguments
 openssl req -new -x509 -nodes -newkey rsa:4096 -days 365 \
-    -subj "/C=CN/ST=SH/L=Shanghai/CN=*.x.io" \
+    -subj "/C=CN/ST=SH/L=Shanghai/CN=*.x.internal" \
     -keyout certs/key.pem \
     -out certs/cert.pem
 
 # Option 3
 # traefik cannot recognize files with key and crt suffixes
 openssl req -new -x509 -nodes -newkey rsa:4096 -days 365 \
-    -subj "/C=CN/ST=Shanghai/L=Shanghai/CN=*.x.io" \
+    -subj "/C=CN/ST=Shanghai/L=Shanghai/CN=*.x.internal" \
     -keyout certs/domain.key \
     -out certs/domain.crt
 ```
