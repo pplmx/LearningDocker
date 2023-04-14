@@ -18,7 +18,7 @@ services:
             - /opt/gerrit/cache:/var/gerrit/cache
             - /opt/gerrit/plugins:/var/gerrit/plugins
         environment:
-            - CANONICAL_WEB_URL=http://gerrit.m.local
+            - CANONICAL_WEB_URL=http://gerrit.x.io
             - HTTPD_LISTEN_URL=proxy-http://*:8080
         networks:
             - traefik-net
