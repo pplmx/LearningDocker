@@ -1,0 +1,38 @@
+version: Compose specification
+
+services:
+    bitnami-ldap:
+        image: bitnami/openldap
+        restart: always
+        environment:
+            - LDAP_ADMIN_USERNAME=admin
+            - LDAP_ADMIN_PASSWORD=secret
+            - LDAP_USERS=user01,user02
+            - LDAP_PASSWORDS=password1,password2
+            - LDAP_ROOT=dc=chaos,dc=io
+            # for using phpldapadmin, config 389 and 636
+            # if not, remove the following two environments
+            - LDAP_PORT_NUMBER=389
+            - LDAP_LDAPS_PORT_NUMBER=636
+        volumes:
+            - openldap:/bitnami/openldap
+        networks:
+            - traefik-net
+
+    bitnami-ldapadmin:
+        image: osixia/phpldapadmin
+        restart: always
+        environment:
+            - PHPLDAPADMIN_LDAP_HOSTS=bitnami-ldap
+            # if configure https by traefik, you need to configure the following two lines
+            # if not, remove them
+            - VIRTUAL_HOST=bitnami-ldap.x.internal
+            - PHPLDAPADMIN_HTTPS=false
+        networks:
+            - traefik-net
+volumes:
+    openldap:
+
+networks:
+    traefik-net:
+        external: true
