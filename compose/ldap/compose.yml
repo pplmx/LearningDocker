@@ -24,7 +24,7 @@ services:
             - PHPLDAPADMIN_LDAP_HOSTS=ldap
             # if configure https by traefik, you need to configure the following two lines
             # if not, remove them
-            - VIRTUAL_HOST=ldap.m.local
+            - VIRTUAL_HOST=ldap.x.internal
             - PHPLDAPADMIN_HTTPS=false
         networks:
             - traefik-net

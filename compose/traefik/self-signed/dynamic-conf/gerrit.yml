@@ -1,0 +1,12 @@
+http:
+    routers:
+        gerrit:
+            rule: "Host(`gerrit.x.internal`)"
+            service: "gerrit"
+            tls: { }
+
+    services:
+        gerrit:
+            loadBalancer:
+                servers:
+                    -   url: "http://gerrit:8080"

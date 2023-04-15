@@ -1,7 +1,7 @@
 http:
     routers:
         ldap:
-            rule: "Host(`ldap.m.local`)"
+            rule: "Host(`ldap.x.internal`)"
             service: "ldap"
             tls: { }
 
