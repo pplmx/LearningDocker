@@ -5,11 +5,11 @@ services:
         image: bitnami/openldap
         restart: always
         environment:
+            - LDAP_ROOT=dc=chaos,dc=io
             - LDAP_ADMIN_USERNAME=admin
             - LDAP_ADMIN_PASSWORD=secret
             - LDAP_USERS=user01,user02
             - LDAP_PASSWORDS=password1,password2
-            - LDAP_ROOT=dc=chaos,dc=io
             # for using phpldapadmin, config 389 and 636
             # if not, remove the following two environments
             - LDAP_PORT_NUMBER=389
