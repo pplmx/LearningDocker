@@ -1,5 +1,12 @@
 pipeline {
     agent any
+    environment {
+        // this Node18 is from NodeJS plugin creation
+        NODEJS_HOME = tool 'Node18'
+        PATH = "${NODEJS_HOME}/bin:${env.PATH}"
+        // for windows
+        // PATH = "${NODEJS_HOME}/bin;${env.PATH}"
+    }
     stages {
         stage('Clean Workspace') {
             steps {
@@ -29,6 +36,11 @@ pipeline {
             }
             steps {
                 script {
+                    // Just check if the node is ready or not
+                    // If you don't check nodejs project, you can remove
+                    // - sh "npm config ls"
+                    // - the above nodejs environment config
+                    sh "npm config ls"
                     def scannerHome = tool 'SonarScanner';
                     withSonarQubeEnv() {
                        sh "${scannerHome}/bin/sonar-scanner"
