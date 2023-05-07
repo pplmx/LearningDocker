@@ -3,6 +3,7 @@ version: Compose specification
 services:
     traefik:
         image: traefik:3.0
+        restart: always
         ports:
             - "80:80"
             - "443:443"
