@@ -1,9 +1,13 @@
 version: Compose specification
 
 services:
-    bitnami-ldap:
+    ldap-srv:
         image: bitnami/openldap
         restart: always
+        # if you want to use external ldap admin(e.g. Softerra LDAP Administrator) rather than phpldapadmin,
+        # uncomment the following two lines
+        # ports:
+        #     - 1389:389
         environment:
             - LDAP_ROOT=dc=chaos,dc=io
             - LDAP_ADMIN_USERNAME=admin
@@ -19,11 +23,11 @@ services:
         networks:
             - traefik-net
 
-    bitnami-ldapadmin:
+    ldap-ui:
         image: osixia/phpldapadmin
         restart: always
         environment:
-            - PHPLDAPADMIN_LDAP_HOSTS=bitnami-ldap
+            - PHPLDAPADMIN_LDAP_HOSTS=ldap-srv
             # if configure https by traefik, you need to configure the following two lines
             # if not, remove them
             - VIRTUAL_HOST=bitnami-ldap.x.internal

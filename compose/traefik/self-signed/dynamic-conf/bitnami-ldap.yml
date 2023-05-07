@@ -9,4 +9,4 @@ http:
         bitnami-ldap:
             loadBalancer:
                 servers:
-                    -   url: "http://bitnami-ldapadmin"
+                    -   url: "http://ldap-ui"
