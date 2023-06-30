@@ -4,20 +4,12 @@ services:
     ldap-srv:
         image: bitnami/openldap
         restart: always
-        # if you want to use external ldap admin(e.g. Softerra LDAP Administrator) rather than phpldapadmin,
-        # uncomment the following two lines
-        # ports:
-        #     - 1389:389
         environment:
             - LDAP_ROOT=dc=chaos,dc=io
             - LDAP_ADMIN_USERNAME=admin
             - LDAP_ADMIN_PASSWORD=secret
             - LDAP_USERS=user01,user02
             - LDAP_PASSWORDS=password1,password2
-            # for using phpldapadmin, config 389 and 636
-            # if not, remove the following two environments
-            - LDAP_PORT_NUMBER=389
-            - LDAP_LDAPS_PORT_NUMBER=636
         volumes:
             - openldap:/bitnami/openldap
         networks:
@@ -27,11 +19,12 @@ services:
         image: osixia/phpldapadmin
         restart: always
         environment:
-            - PHPLDAPADMIN_LDAP_HOSTS=ldap-srv
+            # due to bitnami/openldap use port 1389 and 1636, so we need to change the port to 1389
+            PHPLDAPADMIN_LDAP_HOSTS: "#PYTHON2BASH:[{'ldap-srv': [{'server': [{'port': 1389}]}]}]"
             # if configure https by traefik, you need to configure the following two lines
             # if not, remove them
-            - VIRTUAL_HOST=bitnami-ldap.x.internal
-            - PHPLDAPADMIN_HTTPS=false
+            VIRTUAL_HOST: ldap.x.internal
+            PHPLDAPADMIN_HTTPS: false
         networks:
             - traefik-net
 volumes:
