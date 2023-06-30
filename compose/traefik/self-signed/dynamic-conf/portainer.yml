@@ -1,0 +1,12 @@
+http:
+    routers:
+        portainer:
+            rule: "Host(`portainer.x.internal`)"
+            service: "portainer"
+            tls: { }
+
+    services:
+        portainer:
+            loadBalancer:
+                servers:
+                    -   url: "http://portainer:9000"

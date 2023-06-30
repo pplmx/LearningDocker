@@ -1,0 +1,19 @@
+version: Compose specification
+
+services:
+    authelia:
+        image: authelia/authelia
+        environment:
+            # maybe you can read them from .env file
+            - AUTHELIA_JWT_SECRET=jwt_secret
+            - AUTHELIA_SESSION_SECRET=session_secret
+            - AUTHELIA_STORAGE_ENCRYPTION_KEY=very_long_storage_encryption_key
+            - TZ=Asia/Shanghai
+        volumes:
+            - ./config:/config
+        networks:
+            - traefik-net
+
+networks:
+    traefik-net:
+        external: true

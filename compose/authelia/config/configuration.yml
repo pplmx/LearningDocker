@@ -1,0 +1,55 @@
+server:
+    host: 0.0.0.0
+    port: 9091
+
+log:
+    level: info
+
+ntp:
+    disable_startup_check: true
+    disable_failure: true
+
+jwt_secret: jwt_secret
+session:
+    name: authelia_session
+    secret: session_secret
+    expiration: 3600000 # 1 hour
+    inactivity: 300000 # 5 minutes
+    domain: x.internal
+
+authentication_backend:
+    ldap:
+        url: ldap://ldap-srv:1389
+        base_dn: dc=chaos,dc=io
+        username_attribute: uid
+        additional_users_dn: ou=users
+        users_filter: (&({username_attribute}={input}))
+        additional_groups_dn: ou=groups
+        groups_filter: (&(member={dn})(objectclass=groupOfNames))
+        group_name_attribute: cn
+        mail_attribute: mail
+        user: cn=admin,dc=chaos,dc=io
+        password: secret
+
+
+access_control:
+    default_policy: deny
+    rules:
+        -   domain: sonar.x.internal
+            policy: two_factor
+
+totp:
+    issuer: Chaos Domain Inc.
+
+regulation:
+    max_retries: 3
+    find_time: 120
+    ban_time: 300
+
+storage:
+    local:
+        path: /config/db.sqlite3
+
+notifier:
+    filesystem:
+        filename: /config/notification.txt
