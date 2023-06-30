@@ -19,7 +19,14 @@ session:
 
 authentication_backend:
     ldap:
+        implementation: custom
         url: ldap://ldap-srv:1389
+        timeout: 5s
+        start_tls: false
+        tls:
+            server_name: ldap.x.internal
+            skip_verify: true
+            minimum_version: TLS1.2
         base_dn: dc=chaos,dc=io
         username_attribute: uid
         additional_users_dn: ou=users
