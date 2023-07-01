@@ -29,9 +29,17 @@ authentication_backend:
             minimum_version: TLS1.2
         base_dn: dc=chaos,dc=io
         username_attribute: uid
+        # here additional_users_dn: ou=users and additional_groups_dn: cn=readers, ou=users
+        # are from the default configuration of bitnami/openldap
+        #
+        # LDAP_DC in bitnami/openldap default value is users
+        # so the default value of additional_users_dn is ou=users
+        #
+        # LDAP_GROUP in bitnami/openldap default value is readers
+        # so the default value of additional_groups_dn is cn=readers, ou=users
         additional_users_dn: ou=users
         users_filter: (&({username_attribute}={input}))
-        additional_groups_dn: ou=groups
+        additional_groups_dn: cn=readers, ou=users
         groups_filter: (&(member={dn})(objectclass=groupOfNames))
         group_name_attribute: cn
         mail_attribute: mail
