@@ -3,6 +3,7 @@ version: Compose specification
 services:
     authelia:
         image: authelia/authelia
+        restart: always
         environment:
             # maybe you can read them from .env file
             - AUTHELIA_JWT_SECRET=jwt_secret

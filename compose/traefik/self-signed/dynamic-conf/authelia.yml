@@ -1,0 +1,47 @@
+http:
+    routers:
+        authelia:
+            rule: "Host(`authelia.x.internal`)"
+            service: "authelia"
+            tls: { }
+
+    services:
+        authelia:
+            loadBalancer:
+                servers:
+                    -   url: "http://authelia:9091"
+                serversTransport: autheliaMutualTLS
+    serversTransports:
+        autheliaMutualTLS:
+            certificates:
+                -   certFile: /certs/cert.pem
+                    keyFile: /certs/key.pem
+            rootCAs:
+                - /certs/rootCA.pem
+    middlewares:
+        authelia:
+            forwardAuth:
+                address: https://authelia:9091/api/verify?rd=https%3A%2F%authelia.x.internal%2F
+                trustForwardHeader: true
+                authResponseHeaders:
+                    - "Remote-User"
+                    - "Remote-Groups"
+                    - "Remote-Email"
+                    - "Remote-Name"
+                tls:
+                    ca: /certs/rootCA.pem
+                    cert: /certs/cert.pem
+                    key: /certs/key.pem
+        authelia-basic:
+            forwardAuth:
+                address: https://authelia:9091/api/verify?auth=basic
+                trustForwardHeader: true
+                authResponseHeaders:
+                    - "Remote-User"
+                    - "Remote-Groups"
+                    - "Remote-Email"
+                    - "Remote-Name"
+                tls:
+                    ca: /certs/rootCA.pem
+                    cert: /certs/cert.pem
+                    key: /certs/key.pem
