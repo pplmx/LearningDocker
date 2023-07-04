@@ -1,7 +1,7 @@
 version: Compose specification
 services:
     assistant:
-        image: "ghcr.io/home-assistant/home-assistant"
+        image: homeassistant/home-assistant
         privileged: true
         network_mode: host
         restart: unless-stopped

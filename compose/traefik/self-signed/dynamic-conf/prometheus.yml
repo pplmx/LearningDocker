@@ -1,0 +1,12 @@
+http:
+    routers:
+        prometheus:
+            rule: "Host(`prometheus.x.internal`)"
+            service: "prometheus"
+            tls: { }
+
+    services:
+        prometheus:
+            loadBalancer:
+                servers:
+                    -   url: "http://prometheus:9090"

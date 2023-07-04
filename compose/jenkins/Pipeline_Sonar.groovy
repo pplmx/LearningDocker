@@ -1,19 +1,16 @@
 pipeline {
     agent any
-    environment {
-        // this Node18 is from NodeJS plugin creation
-        NODEJS_HOME = tool 'Node18'
-        PATH = "${NODEJS_HOME}/bin:${env.PATH}"
-        // for windows
-        // PATH = "${NODEJS_HOME}/bin;${env.PATH}"
+    tools {
+        nodejs 'Node18'
     }
     stages {
         stage('Clean Workspace') {
             steps {
                 deleteDir()
+                sh 'git config --global http.sslVerify false'
             }
         }
-        stage('Checkout Gerrit Latest PatchSet') {
+        stage('SCM') {
             steps {
                 echo "Gerrit: ${GERRIT_HOST}:${GERRIT_PORT}"
                 echo "Project: ${GERRIT_PROJECT}\nBranch: ${GERRIT_BRANCH}\nRefSpec: ${GERRIT_REFSPEC}"
@@ -25,9 +22,16 @@ pipeline {
                     submoduleCfg: [],
                     userRemoteConfigs: [[
                         refspec: "${GERRIT_REFSPEC}",
-                        url: 'http://${GERRIT_HOST}/${GERRIT_PROJECT}'
+                        url: 'https://${GERRIT_HOST}/${GERRIT_PROJECT}'
                     ]]
                 ])
+                script {
+                    if (env.GERRIT_CHANGE_NUMBER && env.GERRIT_PATCHSET_NUMBER) {
+                        def changeBranch = "change-${GERRIT_CHANGE_NUMBER}-${GERRIT_PATCHSET_NUMBER}"
+                        sh "git fetch https://${GERRIT_HOST}/${GERRIT_PROJECT} ${GERRIT_REFSPEC}"
+                        sh "git checkout -b ${changeBranch} FETCH_HEAD"
+                    }
+                }
             }
         }
         stage('SonarQube Analysis') {
@@ -36,11 +40,6 @@ pipeline {
             }
             steps {
                 script {
-                    // Just check if the node is ready or not
-                    // If you don't check nodejs project, you can remove
-                    // - sh "npm config ls"
-                    // - the above nodejs environment config
-                    sh "npm config ls"
                     def scannerHome = tool 'SonarScanner';
                     withSonarQubeEnv() {
                        sh "${scannerHome}/bin/sonar-scanner"

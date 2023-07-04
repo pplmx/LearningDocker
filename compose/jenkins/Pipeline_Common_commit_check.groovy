@@ -6,7 +6,7 @@ pipeline {
                 script {
                     echo "GERRIT_CHANGE_SUBJECT: ${GERRIT_CHANGE_SUBJECT}"
                     def changeSubj = "$GERRIT_CHANGE_SUBJECT".trim()
-                    def match = (changeSubj =~ /^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\([a-z]+\))?:\s.+$/)
+                    def match = (changeSubj =~ /^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\([A-Za-z]+\))?:\s.+$/)
                     if (!match) {
                         echo "Non-Conventional Commit: \n${changeSubj}"
                         error("Commit message does not follow conventional commit format")
@@ -46,8 +46,8 @@ pipeline {
                     def commitMessage = new String(decodedBytes, "UTF-8")
                     // trim for each line and filter out the empty line
                     def lines = commitMessage.split('\n').collect { it.trim() }.findAll { it }
-                    def issuesCount = lines.count { it.startsWith('issue: #') }
-                    if (issuesCount < 1) {
+                    def changeIdCount = lines.count { it.startsWith('issue: #') }
+                    if (changeIdCount < 1) {
                         error("Issue-Id is required. \nLike as: \nissue: #I6U9YE")
                     }
                 }

@@ -26,7 +26,7 @@ destroy:
 help:
 	@echo ""
 	@echo "Usage:"
-	@echo " make [target]"
+	@echo "    make [target]"
 	@echo ""
 	@echo "Targets:"
 	@awk '/^[a-zA-Z\-_0-9]+:/ \

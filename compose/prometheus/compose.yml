@@ -1,0 +1,16 @@
+version: Compose specification
+
+services:
+    prometheus:
+        image: prom/prometheus
+        restart: always
+        environment:
+            - TZ=Asia/Shanghai
+        volumes:
+            - "./prometheus.yml:/etc/prometheus/prometheus.yml"
+        networks:
+            - traefik-net
+
+networks:
+    traefik-net:
+        external: true

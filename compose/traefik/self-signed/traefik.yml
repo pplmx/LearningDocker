@@ -3,6 +3,10 @@ log:
     level: INFO
 api:
     dashboard: true
+providers:
+    file:
+        directory: /etc/traefik/dynamic-conf
+        watch: true
 entryPoints:
     web:
         address: :80
@@ -14,7 +18,8 @@ entryPoints:
                     permanent: true
     websecure:
         address: :443
-providers:
-    file:
-        directory: /etc/traefik/dynamic-conf
-        watch: true
+    metrics:
+        address: :8082
+metrics:
+    prometheus:
+        entryPoint: metrics
