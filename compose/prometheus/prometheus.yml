@@ -2,6 +2,10 @@ global:
     scrape_interval: 15s
 
 scrape_configs:
-    -   job_name: 'traefik'
+    -   job_name: 'prometheus' # monitor prometheus itself
+        scrape_interval: 5s
+        static_configs:
+            -   targets: [ 'localhost:9090' ]
+    -   job_name: 'traefik' # monitor traefik
         static_configs:
             -   targets: [ 'traefik:8082' ]

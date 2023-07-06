@@ -9,3 +9,13 @@ http:
             rule: Host(`traefik.x.internal`)
             service: api@internal
             tls: { }
+# metrics router is not necessary, but it's a good practice to separate metrics from other services.
+        metrics:
+            rule: Host(`traefik.x.internal`) && PathPrefix(`/metrics`)
+            service: metrics
+            tls: { }
+    services:
+        metrics:
+            loadBalancer:
+                servers:
+                    -   url: http://traefik:8082
