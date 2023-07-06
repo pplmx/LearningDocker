@@ -1,0 +1,12 @@
+http:
+    routers:
+        grafana:
+            rule: "Host(`grafana.x.internal`)"
+            service: "grafana"
+            tls: { }
+
+    services:
+        grafana:
+            loadBalancer:
+                servers:
+                    -   url: "http://grafana:3000"
