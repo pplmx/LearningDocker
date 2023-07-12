@@ -2,4 +2,8 @@
 
 ## FYI
 
-https://github.com/tiredofit/docker-self-service-password/blob/main/examples/docker-compose.yml
+https://github.com/ltb-project/self-service-password
+
+https://self-service-password.readthedocs.io/
+
+https://github.com/tiredofit/docker-self-service-password
