@@ -1,5 +1,9 @@
 # SSP(Self-Service Password) with LDAP
 
+## Usage
+
+Access https://ssp.x.internal/ to change password.
+
 ## FYI
 
 https://github.com/ltb-project/self-service-password
