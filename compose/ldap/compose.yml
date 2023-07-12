@@ -1,36 +1,34 @@
 version: Compose specification
 
 services:
-    ldap:
-        image: osixia/openldap
+    ldap-srv:
+        image: bitnami/openldap
         restart: always
         environment:
-            - LDAP_ORGANISATION=Chaos Inc.
-            # if LDAP_DOMAIN=chaos.io, the login DN will be "cn=admin,dc=chaos,dc=io"
-            # LDAP_DOMAIN default value is "example.org"
-            # so default login DN is "cn=admin,dc=example,dc=org"
-            - LDAP_DOMAIN=chaos.io
+            - LDAP_ROOT=dc=chaos,dc=io
+            - LDAP_ADMIN_USERNAME=admin
             - LDAP_ADMIN_PASSWORD=secret
+            - LDAP_USERS=user01,user02
+            - LDAP_PASSWORDS=password1,password2
         volumes:
-            - ldap:/var/lib/ldap
-            - slapd:/etc/ldap/slapd.d
+            - openldap:/bitnami/openldap
         networks:
             - traefik-net
 
-    ldapadmin:
+    ldap-ui:
         image: osixia/phpldapadmin
         restart: always
         environment:
-            - PHPLDAPADMIN_LDAP_HOSTS=ldap
+            # due to bitnami/openldap use port 1389 and 1636, so we need to change the port to 1389
+            PHPLDAPADMIN_LDAP_HOSTS: "#PYTHON2BASH:[{'ldap-srv': [{'server': [{'port': 1389}]}]}]"
             # if configure https by traefik, you need to configure the following two lines
             # if not, remove them
-            - VIRTUAL_HOST=ldap.x.internal
-            - PHPLDAPADMIN_HTTPS=false
+            VIRTUAL_HOST: ldap.x.internal
+            PHPLDAPADMIN_HTTPS: false
         networks:
             - traefik-net
 volumes:
-    ldap:
-    slapd:
+    openldap:
 
 networks:
     traefik-net:

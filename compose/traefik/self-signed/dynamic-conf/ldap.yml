@@ -4,9 +4,17 @@ http:
             rule: "Host(`ldap.x.internal`)"
             service: "ldap"
             tls: { }
+        ssp:
+            rule: "Host(`ssp.x.internal`)"
+            service: "ssp"
+            tls: { }
 
     services:
         ldap:
             loadBalancer:
                 servers:
-                    -   url: "http://ldapadmin"
+                    -   url: "http://ldap-ui"
+        ssp:
+            loadBalancer:
+                servers:
+                    -   url: "http://ssp"
