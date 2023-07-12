@@ -1,15 +1,15 @@
 <?php
 // general
 $keyphrase = "mysecret";
-$debug = true;
-$smarty_debug = true;
+// $debug = true;
+// $smarty_debug = true;
 $login_forbidden_chars = "*()&|";
 
 // ldap connection
 $ldap_url = "ldap://ldap-srv:1389";
 $ldap_binddn = "cn=admin,dc=chaos,dc=io";
 $ldap_bindpw = "secret";
-$who_change_password = "user";
+$who_change_password = "manager";
 $ldap_base = "ou=users,dc=chaos,dc=io";
 $ldap_filter = "(&(objectClass=person)(uid={login}))";
 
