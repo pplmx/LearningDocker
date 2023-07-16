@@ -1,12 +1,12 @@
 http:
     routers:
-        prometheus:
+        prom:
             rule: "Host(`prometheus.x.internal`)"
-            service: "prometheus"
+            service: "prom"
             tls: { }
 
     services:
-        prometheus:
+        prom:
             loadBalancer:
                 servers:
                     -   url: "http://prometheus:9090"
