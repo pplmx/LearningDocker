@@ -28,8 +28,11 @@ ldap:
 prometheus:
 	$(call start_stack,prometheus)
 
-# Destroy all stacks
-destroy:
+# Start all stacks
+start: traefik ldap prometheus
+
+# Stop all stacks
+stop:
 	$(call stop_stack,prometheus)
 	$(call stop_stack,ldap)
 	@docker compose -f traefik/self-signed/compose.yml down
