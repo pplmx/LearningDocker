@@ -1,4 +1,4 @@
-.PHONY: help traefik ldap prometheus destroy
+.PHONY: help traefik portainer ldap prometheus destroy
 .DEFAULT_GOAL := help
 
 COMPOSE_CLI := docker compose
@@ -20,6 +20,10 @@ endef
 traefik:
     $(call start_stack,traefik)
 
+# Start portainer
+portainer:
+	$(call start_stack,portainer)
+
 # Start ldap
 ldap:
     $(call start_stack,ldap)
@@ -29,12 +33,13 @@ prometheus:
 	$(call start_stack,prometheus)
 
 # Start all stacks
-start: traefik ldap prometheus
+start: traefik portainer ldap prometheus
 
 # Stop all stacks
 stop:
 	$(call stop_stack,prometheus)
 	$(call stop_stack,ldap)
+	$(call stop_stack,portainer)
 	@docker compose -f traefik/self-signed/compose.yml down
 
 # Show help
