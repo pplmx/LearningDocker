@@ -6,7 +6,8 @@ services:
         restart: always
         ports:
             - "80:80"
-            - "443:443"
+            - "443:443/tcp"
+            - "443:443/udp"
         environment:
             - TZ=Asia/Shanghai
         volumes:

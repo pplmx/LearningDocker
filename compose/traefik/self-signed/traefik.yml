@@ -14,12 +14,12 @@ entryPoints:
             redirections:
                 entryPoint:
                     to: websecure
-                    scheme: https
-                    permanent: true
     websecure:
         address: :443
+        http3: {}
     metrics:
         address: :8082
 metrics:
     prometheus:
         entryPoint: metrics
+        manualRouting: true
