@@ -1,6 +1,6 @@
 version: Compose specification
 services:
-    assistant:
+    ha:
         image: homeassistant/home-assistant
         privileged: true
         network_mode: host
@@ -8,5 +8,6 @@ services:
         volumes:
             - config:/config
             - /etc/localtime:/etc/localtime:ro
+            - /run/dbus:/run/dbus:ro
 volumes:
     config:

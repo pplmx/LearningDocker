@@ -1,0 +1,12 @@
+http:
+    routers:
+        adguard:
+            rule: "Host(`ad.x.internal`)"
+            service: "adguard"
+            tls: { }
+
+    services:
+        adguard:
+            loadBalancer:
+                servers:
+                    -   url: "http://adguard:3000"
