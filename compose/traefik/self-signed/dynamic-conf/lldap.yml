@@ -1,0 +1,12 @@
+http:
+    routers:
+        lldap:
+            rule: "Host(`lldap.x.internal`)"
+            service: "lldap"
+            tls: { }
+
+    services:
+        lldap:
+            loadBalancer:
+                servers:
+                    -   url: "http://lldap:17170"

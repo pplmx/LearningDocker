@@ -1,0 +1,26 @@
+version: Compose specification
+
+services:
+    lldap:
+        image: lldap/lldap
+        expose:
+            - 3890
+            - 17170
+        volumes:
+            - lldap:/data
+        environment:
+            - UID=1000
+            - GID=1000
+            - TZ=Asia/Shanghai
+            - LLDAP_JWT_SECRET=secret123
+            - LLDAP_LDAP_USER_PASS=secret123
+            - LLDAP_LDAP_BASE_DN=dc=example,dc=org
+        networks:
+            - traefik-net
+
+volumes:
+    lldap:
+
+networks:
+    traefik-net:
+        external: true
