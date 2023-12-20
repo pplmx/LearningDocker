@@ -1,0 +1,19 @@
+version: Compose specification
+
+# https://hub.docker.com/r/bitnami/phpmyadmin
+services:
+    phpmyadmin:
+        image: bitnami/phpmyadmin
+        restart: always
+        expose:
+            - 8080
+            - 8443
+        environment:
+            - PHPMYADMIN_ALLOW_ARBITRARY_SERVER=true
+            - DATABASE_ENABLE_SSL=true
+        networks:
+            - traefik-net
+
+networks:
+    traefik-net:
+        external: true

@@ -1,0 +1,12 @@
+http:
+    routers:
+        phpmyadmin:
+            rule: "Host(`phpmyadmin.x.internal`)"
+            service: "phpmyadmin"
+            tls: { }
+
+    services:
+        phpmyadmin:
+            loadBalancer:
+                servers:
+                    -   url: "http://phpmyadmin:8080"
