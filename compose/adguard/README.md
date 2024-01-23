@@ -59,3 +59,7 @@ Then restart `systemd-resolved`:
 ```bash
 sudo systemctl restart systemd-resolved
 ```
+
+## FYI
+
+[Referenced](https://www.smarthomebeginner.com/adguard-home-docker-compose-guide)
