@@ -1,0 +1,12 @@
+http:
+    routers:
+        uptime:
+            rule: "Host(`up.x.internal`)"
+            service: "uptime"
+            tls: { }
+
+    services:
+        uptime:
+            loadBalancer:
+                servers:
+                    -   url: "http://uptime-kuma:3001"
