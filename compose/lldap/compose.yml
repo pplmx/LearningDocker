@@ -1,5 +1,3 @@
-version: Compose specification
-
 services:
     lldap:
         image: lldap/lldap

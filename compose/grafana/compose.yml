@@ -1,5 +1,3 @@
-version: Compose specification
-
 services:
     grafana:
         image: grafana/grafana

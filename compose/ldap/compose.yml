@@ -1,5 +1,3 @@
-version: Compose specification
-
 services:
     ldap-srv:
         image: bitnami/openldap

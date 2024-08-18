@@ -1,5 +1,3 @@
-version: Compose specification
-
 services:
     traefik:
         image: traefik:3.0

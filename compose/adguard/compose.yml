@@ -1,5 +1,3 @@
-version: Compose specification
-
 services:
     adguard:
         image: adguard/adguardhome

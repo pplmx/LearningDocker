@@ -1,5 +1,3 @@
-version: Compose specification
-
 services:
     nginx:
         image: nginx:1.21

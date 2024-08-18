@@ -1,5 +1,3 @@
-version: Compose specification
-
 services:
     prometheus:
         image: prom/prometheus
