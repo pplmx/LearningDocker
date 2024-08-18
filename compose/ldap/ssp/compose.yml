@@ -1,4 +1,3 @@
-version: Compose specification
 services:
     ssp:
         image: ltbproject/self-service-password

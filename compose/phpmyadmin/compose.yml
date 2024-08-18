@@ -1,4 +1,3 @@
-# https://hub.docker.com/r/bitnami/phpmyadmin
 services:
     phpmyadmin:
         image: bitnami/phpmyadmin
