@@ -2,45 +2,16 @@ services:
     adguard:
         image: adguard/adguardhome
         container_name: adh
-        ports:
-            # Plain DNS, "bind: address already in use" error to see the README.md
-            - 53:53/tcp
-            - 53:53/udp
-
-            # # DHCP server, this requires "network_mode: host", and remove the entire "ports" section
-            # - 67:67/udp
-            # - 68:68/tcp
-            # - 68:68/udp
-
-            # # DNS-over-HTTPS
-            # - 80:80/tcp
-            # - 443:443/tcp
-            # - 443:443/udp
-            # # Admin panel
-            # - 3000:3000/tcp
-
-            # DNS-over-TLS
-            - 853:853/tcp
-
-            # DNS-over-QUIC
-            - 784:784/udp
-            - 853:853/udp
-            - 8853:8853/udp
-
-            # DNSCrypt
-            - 5443:5443/tcp
-            - 5443:5443/udp
+        restart: always
+        environment:
+            - TZ=Asia/Shanghai
+        network_mode: host
+        extra_hosts:
+            - "host.docker.internal:192.168.31.109"
         volumes:
             - adguard_work:/opt/adguardhome/work
             - adguard_conf:/opt/adguardhome/conf
-        networks:
-            traefik-net:
-                ipv4_address: 172.16.238.6
 
 volumes:
     adguard_work:
     adguard_conf:
-
-networks:
-    traefik-net:
-        external: true

@@ -1,0 +1,48 @@
+### Dynamic Configuration
+http:
+    routers:
+        dashboard:
+            rule: "Host(`traefik.x.internal`)"
+            service: api@internal
+
+        uptime:
+            rule: "Host(`uptime.x.internal`)"
+            service: "uptime"
+
+        portainer:
+            rule: "Host(`portainer.x.internal`)"
+            service: "portainer"
+
+        ha:
+            rule: "Host(`ha.x.internal`)"
+            service: "ha"
+
+        adh:
+            rule: "Host(`adh.x.internal`)"
+            service: "adh"
+
+    services:
+        uptime:
+            loadBalancer:
+                servers:
+                    -   url: "http://uptime:3001"
+
+        portainer:
+            loadBalancer:
+                servers:
+                    -   url: "http://portainer:9000"
+
+        grafana:
+            loadBalancer:
+                servers:
+                    -   url: "http://grafana:3000"
+
+        ha:
+            loadBalancer:
+                servers:
+                    -   url: "http://host.docker.internal:8123"
+
+        adh:
+            loadBalancer:
+                servers:
+                    -   url: "http://host.docker.internal:3000"

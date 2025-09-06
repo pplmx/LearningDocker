@@ -12,8 +12,10 @@ services:
             - "grafana:/var/lib/grafana"
         networks:
             - traefik-net
+
+volumes:
+    grafana:
+
 networks:
     traefik-net:
         external: true
-volumes:
-    grafana:

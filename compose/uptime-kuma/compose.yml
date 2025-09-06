@@ -1,15 +1,15 @@
 services:
-    uptime-kuma:
+    uptime:
         image: louislam/uptime-kuma
         restart: always
         volumes:
-            - uptime-kuma-data:/app/data
+            - uptime_data:/app/data
         networks:
             - traefik-net
+
+volumes:
+    uptime_data:
 
 networks:
     traefik-net:
         external: true
-
-volumes:
-    uptime-kuma-data:

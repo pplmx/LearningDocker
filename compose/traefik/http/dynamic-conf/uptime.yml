@@ -1,0 +1,11 @@
+http:
+    routers:
+        uptime:
+            rule: "Host(`uptime.x.internal`)"
+            service: "uptime"
+
+    services:
+        uptime:
+            loadBalancer:
+                servers:
+                    -   url: "http://uptime:3001"

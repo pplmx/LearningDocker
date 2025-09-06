@@ -4,6 +4,13 @@ services:
         privileged: true
         network_mode: host
         restart: unless-stopped
+        environment:
+            - TZ=Asia/Shanghai
+        extra_hosts:
+            - "host.docker.internal:192.168.31.109"
+        cap_add:
+            - NET_ADMIN
+            - NET_RAW
         volumes:
             - config:/config
             - /etc/localtime:/etc/localtime:ro
