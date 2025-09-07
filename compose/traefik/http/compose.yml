@@ -4,13 +4,18 @@ services:
         restart: always
         ports:
             - "80:80"
+            - "443:443/tcp"
+            - "443:443/udp"  # Required for HTTP/3
         environment:
             - TZ=Asia/Shanghai
+        extra_hosts:
+            - "host.docker.internal:192.168.31.109"
         volumes:
             # /traefik.yml and /etc/traefik/traefik.yml are both available.
             - "./traefik.yml:/etc/traefik/traefik.yml"
             # dynamic-conf dir is self-defined
             - "./dynamic-conf:/etc/traefik/dynamic-conf"
+            - "./certs:/certs"
             - "/var/run/docker.sock:/var/run/docker.sock:ro"
         networks:
             - traefik-net

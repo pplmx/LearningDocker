@@ -1,25 +1,45 @@
 ### Dynamic Configuration
+tls:
+    certificates:
+        - certFile: /certs/cert.pem
+          keyFile: /certs/key.pem
+
 http:
     routers:
         dashboard:
             rule: "Host(`traefik.x.internal`)"
             service: api@internal
+            tls: {}
 
         uptime:
             rule: "Host(`uptime.x.internal`)"
             service: "uptime"
+            tls: {}
 
         portainer:
             rule: "Host(`portainer.x.internal`)"
             service: "portainer"
+            tls: {}
+
+        prom:
+            rule: "Host(`prom.x.internal`)"
+            service: "prom"
+            tls: {}
+
+        grafana:
+            rule: "Host(`grafana.x.internal`)"
+            service: "grafana"
+            tls: {}
 
         ha:
             rule: "Host(`ha.x.internal`)"
             service: "ha"
+            tls: {}
 
         adh:
             rule: "Host(`adh.x.internal`)"
             service: "adh"
+            tls: {}
 
     services:
         uptime:
@@ -31,6 +51,11 @@ http:
             loadBalancer:
                 servers:
                     -   url: "http://portainer:9000"
+
+        prom:
+            loadBalancer:
+                servers:
+                    -   url: "http://prometheus:9090"
 
         grafana:
             loadBalancer:
@@ -45,4 +70,6 @@ http:
         adh:
             loadBalancer:
                 servers:
-                    -   url: "http://host.docker.internal:3000"
+                    # 访问 http://192.168.31.109:3000, 进行配置, 8080 是页面重新配置的
+                    # 192.168.31.109 是 docker 宿主机的 ip
+                    -   url: "http://host.docker.internal:8080"

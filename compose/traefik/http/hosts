@@ -5,12 +5,13 @@
 # 系统监控与健康检查
 192.168.31.109 uptime.x.internal         # Uptime（系统健康检查）
 192.168.31.109 grafana.x.internal        # Grafana（数据可视化仪表板）
+192.168.31.109 prom.x.internal           # Prometheus
 
 # 容器管理
 192.168.31.109 portainer.x.internal      # Portainer（容器管理界面）
 
 # 家庭自动化与智能家居核心
-192.168.31.109 homeassistant.x.internal  # Home Assistant（智能家居中枢）
+192.168.31.109 ha.x.internal             # Home Assistant（智能家居中枢）
 192.168.31.109 nodered.x.internal        # Node-RED（可视化自动化编程）
 192.168.31.109 mqtt.x.internal           # MQTT Broker（物联网消息中间件）
 192.168.31.109 zigbee2mqtt.x.internal    # Zigbee2MQTT（Zigbee设备桥接）
@@ -27,7 +28,7 @@
 192.168.31.109 transmission.x.internal   # Transmission（下载工具）
 
 # 网络安全与广告拦截
-192.168.31.109 adguardhome.x.internal    # AdGuard Home（高级广告拦截与家长控制）
+192.168.31.109 adh.x.internal            # AdGuard Home（高级广告拦截与家长控制）
 192.168.31.109 pihole.x.internal         # Pi-hole（轻量级广告拦截，二选一）
 192.168.31.109 unbound.x.internal        # Unbound（递归DNS解析器）
 
