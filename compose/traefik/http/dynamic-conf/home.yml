@@ -35,6 +35,8 @@ http:
             rule: "Host(`nextcloud.x.internal`)"
             service: "nextcloud"
             tls: {}
+            entryPoints:
+                - websecure
             middlewares:
                 - nextcloud-chain
 
