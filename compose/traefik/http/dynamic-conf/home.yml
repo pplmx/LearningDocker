@@ -11,14 +11,24 @@ http:
             service: api@internal
             tls: {}
 
+        portainer:
+            rule: "Host(`portainer.x.internal`)"
+            service: "portainer"
+            tls: {}
+
+        adh:
+            rule: "Host(`adh.x.internal`)"
+            service: "adh"
+            tls: {}
+
         uptime:
             rule: "Host(`uptime.x.internal`)"
             service: "uptime"
             tls: {}
 
-        portainer:
-            rule: "Host(`portainer.x.internal`)"
-            service: "portainer"
+        homarr:
+            rule: "Host(`homarr.x.internal`)"
+            service: "homarr"
             tls: {}
 
         prom:
@@ -36,21 +46,28 @@ http:
             service: "ha"
             tls: {}
 
-        adh:
-            rule: "Host(`adh.x.internal`)"
-            service: "adh"
-            tls: {}
-
     services:
+        portainer:
+            loadBalancer:
+                servers:
+                    -   url: "http://portainer:9000"
+
+        adh:
+            loadBalancer:
+                servers:
+                    # 访问 http://192.168.31.109:3000, 进行配置, 8080 是页面重新配置的
+                    # 192.168.31.109 是 docker 宿主机的 ip
+                    -   url: "http://host.docker.internal:8080"
+
         uptime:
             loadBalancer:
                 servers:
                     -   url: "http://uptime:3001"
 
-        portainer:
+        homarr:
             loadBalancer:
                 servers:
-                    -   url: "http://portainer:9000"
+                    -   url: "http://homarr:7575"
 
         prom:
             loadBalancer:
@@ -66,10 +83,3 @@ http:
             loadBalancer:
                 servers:
                     -   url: "http://host.docker.internal:8123"
-
-        adh:
-            loadBalancer:
-                servers:
-                    # 访问 http://192.168.31.109:3000, 进行配置, 8080 是页面重新配置的
-                    # 192.168.31.109 是 docker 宿主机的 ip
-                    -   url: "http://host.docker.internal:8080"

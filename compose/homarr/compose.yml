@@ -1,0 +1,19 @@
+services:
+    homarr:
+        image: ghcr.io/homarr-labs/homarr:latest
+        restart: unless-stopped
+        environment:
+            - BASE_URL=homarr.x.internal
+            - SECRET_ENCRYPTION_KEY=2f0068040e3f60a2c3446bd135d6c9400e0e2e17349b122cd68a83af97a5e886
+        volumes:
+            - homarr_data:/appdata
+            - "/var/run/docker.sock:/var/run/docker.sock:ro"
+        networks:
+            - traefik-net
+
+volumes:
+    homarr_data:
+
+networks:
+    traefik-net:
+        external: true
