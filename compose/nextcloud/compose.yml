@@ -1,0 +1,19 @@
+services:
+    nextcloud:
+        image: ghcr.io/nextcloud-releases/all-in-one:latest
+        init: true
+        restart: always
+        container_name: nextcloud-aio-mastercontainer # This line is not allowed to be changed as otherwise AIO will not work correctly
+        volumes:
+            - nextcloud_data:/mnt/docker-aio-config
+            - /var/run/docker.sock:/var/run/docker.sock:ro
+        networks:
+            - traefik-net
+
+volumes:
+    nextcloud_data:
+        name: nextcloud_aio_mastercontainer  # This line is not allowed to be changed as otherwise the built-in backup solution will not work
+
+networks:
+    traefik-net:
+        external: true

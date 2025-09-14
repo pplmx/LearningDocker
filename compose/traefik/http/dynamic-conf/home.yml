@@ -31,6 +31,13 @@ http:
             service: "homarr"
             tls: {}
 
+        nextcloud:
+            rule: "Host(`nextcloud.x.internal`)"
+            service: "nextcloud"
+            tls: {}
+            middlewares:
+                - nextcloud-chain
+
         prom:
             rule: "Host(`prom.x.internal`)"
             service: "prom"
@@ -69,6 +76,11 @@ http:
                 servers:
                     -   url: "http://homarr:7575"
 
+        nextcloud:
+            loadBalancer:
+                servers:
+                    -   url: "http://nextcloud:11000"
+
         prom:
             loadBalancer:
                 servers:
@@ -83,3 +95,16 @@ http:
             loadBalancer:
                 servers:
                     -   url: "http://host.docker.internal:8123"
+
+    # middlewares section is only for nextcloud, and can be removed if you don't use nextcloud
+    middlewares:
+        nextcloud-secure-headers:
+            headers:
+                hostsProxyHeaders:
+                    - "X-Forwarded-Host"
+                referrerPolicy: "same-origin"
+
+        nextcloud-chain:
+            chain:
+                middlewares:
+                    - nextcloud-secure-headers
