@@ -1,0 +1,22 @@
+services:
+    nextcloud:
+        image: linuxserver/nextcloud:latest
+        restart: unless-stopped
+        environment:
+            - PUID=1000
+            - PGID=1000
+            - TZ=Asia/Shanghai
+        volumes:
+            - nextcloud_config:/config
+            - nextcloud_data:/data
+            - /var/run/docker.sock:/var/run/docker.sock:ro
+        networks:
+            - traefik-net
+
+volumes:
+    nextcloud_data:
+    nextcloud_config:
+
+networks:
+    traefik-net:
+        external: true
