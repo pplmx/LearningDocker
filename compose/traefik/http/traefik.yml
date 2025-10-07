@@ -1,16 +1,20 @@
 ### Static Configuration
 log:
     level: INFO
-#accessLog:
-#    filePath: /var/log/access.log
 api:
-    insecure: true
     dashboard: true
 entryPoints:
     web:
         address: :80
+        http:
+            redirections:
+                entryPoint:
+                    to: websecure
+                    scheme: https
+                    permanent: true
     websecure:
         address: :443
+        http3: {}  # Enables HTTP/3 support
 providers:
     file:
         # location in traefik container
