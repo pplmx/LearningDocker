@@ -9,8 +9,6 @@ services:
         extra_hosts:
             - "host.docker.internal:192.168.31.109"
         volumes:
-            - config:/config
+            - ./config:/config
             - /etc/localtime:/etc/localtime:ro
             - /run/dbus:/run/dbus:ro
-volumes:
-    config:
