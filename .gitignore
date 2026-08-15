@@ -3,6 +3,9 @@
 **/.scannerwork
 compose/homeassistant/config/
 
+# Local environment / secrets
+.env
+
 # IntelliJ project files
 .idea
 out

@@ -9,7 +9,7 @@ services:
         environment:
             - TZ=Asia/Shanghai
         extra_hosts:
-            - "host.docker.internal:192.168.31.109"
+            - "host.docker.internal:${HOST_IP:?set HOST_IP in .env (see .env.example)}"
         volumes:
             # /traefik.yml and /etc/traefik/traefik.yml are both available.
             - "./traefik.yml:/etc/traefik/traefik.yml"

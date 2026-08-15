@@ -7,7 +7,7 @@ services:
             - TZ=Asia/Shanghai
         network_mode: host
         extra_hosts:
-            - "host.docker.internal:192.168.31.109"
+            - "host.docker.internal:${HOST_IP:?set HOST_IP in .env (see .env.example)}"
         volumes:
             - adguard_work:/opt/adguardhome/work
             - adguard_conf:/opt/adguardhome/conf
