@@ -6,6 +6,11 @@ services:
         volumes:
             - /opt/redis/data:/data
         restart: always
+        healthcheck:
+            test: ["CMD", "redis-cli", "ping"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
     redisinsight:
         image: redislabs/redisinsight
         ports:
